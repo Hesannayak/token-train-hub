@@ -6,7 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { Progress } from "@/components/ui/progress";
 import { MODELS, fmt } from "@/lib/data";
-import { useWallet } from "@/lib/wallet";
+import { useWallet, PRE_LAUNCH } from "@/lib/wallet";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/train")({
@@ -32,7 +32,7 @@ const EXAMPLES = [
 
 function Train() {
   const { model: initial } = Route.useSearch();
-  const { wallet, connect, setBalance } = useWallet();
+  const { wallet, connect, setBalance, refresh, loading, error } = useWallet();
   const [name, setName] = useState("");
   const [prompt, setPrompt] = useState("");
   const [modelId, setModelId] = useState(initial ?? MODELS[0]!.id);
@@ -47,9 +47,12 @@ function Train() {
     return () => clearTimeout(t);
   }, [progress]);
 
-  const start = () => {
+  const start = async () => {
     if (!wallet) return;
-    setBalance(wallet.balance - model.cost);
+    // Re-verify the on-chain $TOKEN balance right before boarding.
+    const bal = await refresh();
+    if (bal < model.minHold || bal < model.cost) return;
+    setBalance(bal - model.cost);
     setProgress(0);
   };
 
@@ -133,9 +136,12 @@ function Train() {
             <Button asChild className="w-full" variant="outline"><Link to="/token">Get more $TOKEN</Link></Button>
           </>
         ) : (
-          <Button className="w-full" disabled={!prompt.trim() || !affordable} onClick={start}>All aboard — start training</Button>
+          <Button className="w-full" disabled={!prompt.trim() || !affordable || loading} onClick={start}>{loading ? "Verifying $TOKEN…" : "All aboard — start training"}</Button>
         )}
-        <p className="mt-3 font-mono text-[11px] text-muted-foreground">Demo mode: wallet and training are simulated.</p>
+        {error && <p className="mt-3 text-sm text-destructive">{error}</p>}
+        <p className="mt-3 font-mono text-[11px] text-muted-foreground">
+          {PRE_LAUNCH ? "Real Solana wallet · $TOKEN not launched yet, preview balance shown." : "Balance verified on Solana before training."}
+        </p>
       </aside>
     </div>
   );

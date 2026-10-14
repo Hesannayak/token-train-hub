@@ -41,7 +41,7 @@ export function SiteHeader() {
             </Button>
           ) : (
             <Button size="sm" onClick={connect}>
-              <Wallet className="h-4 w-4" /> Connect wallet
+              <Wallet className="h-4 w-4" /> Connect Phantom
             </Button>
           )}
         </div>
