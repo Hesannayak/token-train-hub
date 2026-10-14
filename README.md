@@ -1,14 +1,25 @@
-# Welcome to your Lovable project
+# Token Train Hub
+
+create a frontend for the idea:
+project name: token train.
+train a custom AI model just with prompt.
+choose model.
+hold $TOKEN to take part in training.
+$TOKEN is the utility token of the platform
+
+create required pages.
 
 This project was built with [Lovable](https://lovable.dev).
 
+**Live app**: https://token-train-hub.lovable.app
+
 ## Build with Lovable
 
-Open your project in the [Lovable editor](https://lovable.dev) and keep building.
+Continue developing this project in the [Lovable editor](https://lovable.dev/projects/c76305d7-9c48-44f4-9c71-57dbd6c1bcca).
 
 - **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: connect the project to GitHub and every change made in Lovable is committed straight to your repository.
-- **Full ownership**: this code is yours. Push to your repository and your changes sync back into Lovable, ready for your next prompt.
+- **Stay in sync**: every change made in Lovable is committed straight to this repository.
+- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
 
 ## Development
 
@@ -20,10 +31,3 @@ cd <repository-name>
 npm i
 npm run dev
 ```
-
-## Built with
-
-- TanStack Start
-- TypeScript
-- React
-- Tailwind CSS
