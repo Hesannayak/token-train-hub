@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 // Real Solana wallet (Phantom / any wallet injecting window.solana).
 // $TOKEN balance is read on-chain from the SPL mint below.
 // Until $TOKEN launches (no mint yet), a clearly-labelled preview balance is used.
-export const TOKEN_MINT: string = import.meta.env.VITE_TOKEN_MINT ?? "";
-const RPC: string = import.meta.env.VITE_SOLANA_RPC ?? "https://api.mainnet-beta.solana.com";
+export const TOKEN_MINT: string = import.meta.env['VITE_TOKEN_MINT'] ?? "";
+const RPC: string = import.meta.env['VITE_SOLANA_RPC'] ?? "https://api.mainnet-beta.solana.com";
 const PREVIEW_BALANCE = 12500;
 export const PRE_LAUNCH = !TOKEN_MINT;
 
