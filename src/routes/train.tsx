@@ -10,7 +10,7 @@ import { useWallet } from "@/lib/wallet";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/train")({
-  validateSearch: (s: Record<string, unknown>) => ({ model: typeof s.model === "string" ? s.model : undefined }),
+  validateSearch: (s: Record<string, unknown>): { model?: string } => (typeof s["model"] === "string" ? { model: s["model"] } : {}),
   head: () => ({
     meta: [
       { title: "Train your model — Token Train" },
@@ -35,7 +35,7 @@ function Train() {
   const { wallet, connect, setBalance } = useWallet();
   const [name, setName] = useState("");
   const [prompt, setPrompt] = useState("");
-  const [modelId, setModelId] = useState(initial ?? MODELS[0].id);
+  const [modelId, setModelId] = useState(initial ?? MODELS[0]!.id);
   const [progress, setProgress] = useState<number | null>(null);
   const model = MODELS.find((m) => m.id === modelId)!;
   const eligible = !!wallet && wallet.balance >= model.minHold;

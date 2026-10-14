@@ -43,7 +43,7 @@ function TokenPage() {
       <h2 className="mt-20 text-3xl font-bold">Holder tiers</h2>
       <div className="mt-6 grid gap-4 md:grid-cols-3">
         {TIERS.map((t, i) => {
-          const active = wallet && wallet.balance >= t.hold && (!TIERS[i + 1] || wallet.balance < TIERS[i + 1].hold);
+          const active = wallet && wallet.balance >= t.hold && (!TIERS[i + 1] || wallet.balance < TIERS[i + 1]!.hold);
           return (
             <div key={t.name} className={cn("border p-6", active ? "border-primary bg-primary/5" : "border-border")}>
               <div className="flex items-center justify-between">
